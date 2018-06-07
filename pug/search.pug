@@ -1,0 +1,45 @@
+extends layout/template
+block title
+    <?php
+    |   //Template Name: Search
+    |?>
+
+block content
+    <?php 
+    |    $text = get_search_query();
+    |    $allsearch = new WP_Query("s=$s&showposts=0"); 
+    |    $qtdPost = $allsearch ->found_posts;
+    |?>
+
+    <?php if( have_posts() ): ?>
+        h1 tem post
+        h1 Você buscou por: <?php echo $text ?>
+        h2 Localizamos <?php echo $qtdPost ?>, espero que ajude :)
+
+        <?php  while( have_posts() ): the_post(); ?> 
+
+            .content-blog.e-flex-col.e-85.e-rel.e-wvw.e-hvh
+                <?php the_post_thumbnail('large', array('class' => 'img-service e-wp e-img-fit')); ?>
+                h1 <?php the_title(); ?>
+                    a(href!="<?php the_permalink()?>") LINK PARA POSTAGEMS
+                       
+                <?php if ( $content_source == 'excerpt' ) { ?>
+                |    <div class="e-sans t-color">
+                |        <?php the_excerpt(); ?>
+                |    </div>
+                |    <?php } else { ?>
+                |    <div class="e-sans t-color">
+                |        <?php the_category(' ')?> 
+                |    </div>
+                |<?php } ?> 
+                btn-link.e-rel.e-serif.t-gray.e-curp
+                    a.e-serif.t-gray.e-curp(href!="<?php the_permalink(); ?>") visualizar
+
+                
+        <?php endwhile; else: ?>
+            h1 Você buscou por: <?php echo $text ?>
+            p.e-serif.t-gray Mas não encontramos nada, tente novamente :)
+    <?php endif; ?>
+        
+        
+    

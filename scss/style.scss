@@ -1,0 +1,18 @@
+@import'partials/normal-reset';
+@import 'partials/alias-mixins';
+@import 'partials/footer';
+@import 'partials/menu';
+@import 'partials/search';
+body {
+    background-color: white;
+}
+
+h1{
+    color: #dd8c8c;
+    font-family: sans-serif;
+}
+
+* {
+    //color: red;
+    font-family: sans-serif;
+}
