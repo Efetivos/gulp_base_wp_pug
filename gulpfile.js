@@ -15,17 +15,13 @@ var DEST = 'dist';
 //PUG
 gulp.task('views', function buildHTML() {
 	return gulp.src('pug/**/*.pug')
-/* 	.pipe(pug({
+	.pipe(pug({
 	  pretty: true
 	}))
 	.pipe(rename({
 		extname: '.php'
 	}))
-	.pipe(gulp.dest('./')) */
-	.pipe(pug({
-		pretty: true
-	  }))
-	  .pipe(gulp.dest('./'))
+	.pipe(gulp.dest('./'))
   });
 
   
@@ -33,7 +29,7 @@ gulp.task('views', function buildHTML() {
 gulp.task('serve', ['sass','views'], function(){
 	injectChanges: true,
 	browserSync.init({
-		proxy:'http://gulpbasewp.local/'
+		proxy:'localhost/WONDERS/wonders_Dev_WP'
 	})
 });
 
@@ -50,6 +46,7 @@ gulp.watch('./*html').on('change', browserSync.reload);
 //sass
 gulp.task('sass', function() {
  gulp.src('sass/*.sass')
+	.pipe(sass({outputStyle:'compressed'}))
 	.pipe(sass({outputStyle:'compressed'}))
 	.pipe(gulp.dest('css'))
 	.pipe(browserSync.stream());
