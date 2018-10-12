@@ -21,11 +21,10 @@ html
         link(rel="stylesheet", href!="<?php echo get_stylesheet_directory_uri(); ?>/css/style.css")
         script(src!="<?php echo get_stylesheet_directory_uri(); ?>/js-compiled/bundle.js")
         <?php wp_head(); ?>
-    body
-        include partials/mymenu.pug
+    body(<?php body_class(); ?>)
+        <?php include 'layout/partials/mymenu.php'; ?>
         block content
 
 
         // init foooter
-        include partials/myfooter.pug
-        block footer
+        <?php include 'layout/partials/myfooter.php'; ?>

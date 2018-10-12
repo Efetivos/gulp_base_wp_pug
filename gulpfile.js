@@ -29,7 +29,9 @@ gulp.task('views', function buildHTML() {
 gulp.task('serve', ['sass','views'], function(){
 	injectChanges: true,
 	browserSync.init({
-		proxy:'localhost/WONDERS/wonders_Dev_WP'
+		proxy:'localhost/teste_wp',
+		online: true,
+		tunnel: true
 	})
 });
 
