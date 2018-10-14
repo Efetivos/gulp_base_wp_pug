@@ -29,7 +29,7 @@ gulp.task('views', function buildHTML() {
 gulp.task('serve', ['sass','views'], function(){
 	injectChanges: true,
 	browserSync.init({
-		proxy:'localhost/teste_wp',
+		proxy:'localhost/Gulp_Base_Pug_WP/',
 		online: true,
 		tunnel: true
 	})
