@@ -65,6 +65,22 @@ gulp.task('views', function buildHTML() {
   });
 ```
 
+### BABEL
+> instal: npm install --save-dev gulp-babel @babel/core @babel/preset-env
+
+```bash
+
+const babel = require('gulp-babel');
+ 
+gulp.task('default', () =>
+    gulp.src('src/app.js')
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(gulp.dest('dist'))
+);
+```
+
 ### Watch
 
 > CRTL + C for stop
@@ -140,11 +156,20 @@ var uglify = require ('gulp-uglify');
 var pug = require('gulp-pug');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
+const babel = require('gulp-babel');
 
 //Vars  Changed
 var SRC = './sass/**/*.sass';
 var DEST = 'dist';
 
+//BABEL
+gulp.task('default', () =>
+    gulp.src('src/app.js')
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(gulp.dest('dist'))
+);
 
 //PUG
 gulp.task('views', function buildHTML() {
@@ -183,6 +208,7 @@ gulp.watch('./*html').on('change', browserSync.reload);
 gulp.task('sass', function() {
  gulp.src('sass/*.sass')
 	.pipe(sass({outputStyle:'compressed'}))
+	.pipe(sass({outputStyle:'compressed'}))
 	.pipe(gulp.dest('css'))
 	.pipe(browserSync.stream());
 });
@@ -207,9 +233,14 @@ gulp.task('watch', function(){
 gulp.task('concat', function() {
 	return gulp.src('./js/*.js')
 	.pipe(concat('main.js'))
+	.pipe(babel({
+		presets: ['@babel/env']
+	}))
+	.pipe(uglify())
 	.pipe(gulp.dest('./js-compiled/'))
 	.pipe(browserSync.stream({stream: true}));
 });
+	
 
 gulp.task('default', ['serve','views','concat']);
 ```
